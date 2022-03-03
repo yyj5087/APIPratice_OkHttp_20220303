@@ -6,6 +6,9 @@ plugins {
 android {
     compileSdk 31
 
+    buildFeatures{
+        dataBinding = true
+    }
     defaultConfig {
         applicationId "com.nepplus.apipratice_okhttp_20220303"
         minSdk 21

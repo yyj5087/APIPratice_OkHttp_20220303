@@ -8,7 +8,7 @@ import com.nepplus.apipratice_okhttp_20220303.databinding.ActivityMainBinding
 import com.nepplus.apipratice_okhttp_20220303.utils.ServerUtil
 import org.json.JSONObject
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BasicActivity() {
     lateinit var binding : ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         setupEvents()
         setValues()
     }
-    fun setupEvents() {
+    override fun setupEvents() {
         binding.btnLogin.setOnClickListener {
 //            ID / PW추출
 
@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-    fun setValues() {
+    override fun setValues() {
 
     }
 }

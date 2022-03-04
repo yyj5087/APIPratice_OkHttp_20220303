@@ -63,56 +63,49 @@ class ServerUtil {
 //                    => UI에서도 JSONObject를 이용해서, 데이터 추출 / 실제 활용
                     val jsonObj = JSONObject(bodyString)
                     Log.d("서버응답", jsonObj.toString())
-                    
+
 //                    실제 : handler 변수에, jsonObj를 가지고 화면에서 어떻게 처리할지 계획이 들어와있다.
 //                    (계획이 되어있을떼만)해당 계획을 실행하자
                     handler?.onResponse(jsonObj)
 //                    핸드러에 실체가 있을때만 실행하자
+                }
 
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-//                    연습: 로그인 성공 / 실패에 따른 로그 출력
-//                    "code" 이름표의 Int를 추출, 그 값을 if호 물어보자
-//                    val code = jsonObj.getInt("code")
-//
-//                    if (code == 200) {
-//                        Log.d("로그인시도", "성공!")
-//
-//                        val dataObj = jsonObj.getJSONObject("data")
-//                        val useObj = dataObj.getJSONObject("user")
-//                        val nickname = useObj.getString("nick_name")
-//                        Log.d("로그인사람", nickname)
-//                    } else {
-//                        Log.d("로그인시도", "실패!")
-//                        val message = jsonObj.getString("message")
-//                        Log.d("실패사유", message)
-//                    }
-//
-//                    Log.d("로그인코드값", code.toString())
-//                }
+
+                fun putRequestSignUp(
+                    email: String,
+                    pw: String,
+                    nickname: String,
+                    handler: JsonResponseHandler?
+                ) {
+                    val urlString = "${BASE_URL}/user"
+                    val formData = FormBody.Builder()
+                        .add("email", email)
+                        .add("password", pw)
+                        .add("nick_name", nickname)
+                        .build()
+
+                    val request = Request.Builder()
+                        .url(urlString)
+                        .put(formData)
+                        .build()
+
+                    val client = OkHttpClient
+                    client.newCall(request).enqueue(object : Callback {
+                        override fun onFailure(call: Call, e: IOException) {
+
+                        }
+
+                        override fun onResponse(call: Call, response: Response) {
+                            val bodyString = response.body!!.string()
+                            val jsonObject = JSONObject(bodyString)
+                            Log.d("서버응답", jsonObject.toString())
+                            handler?.onResponse(jsonObj)
+                        }
+
+                    })
                 }
 
             })
-        }
-        fun putRequestSignUp(email: String, pw: String,nickname: String, handler: JsonResponseHandler?){
-            val urlString = "${BASE_URL}/user"
-            val formData = FormBody.Builder()
-                .add("email",email)
-                .add("password",pw)
-                .add("nick_name",nickname)
-                .build()
-
-            val request = Request.Builder()
-                .url(urlString)
-                .put(formData)
-                .build()
         }
     }
 }

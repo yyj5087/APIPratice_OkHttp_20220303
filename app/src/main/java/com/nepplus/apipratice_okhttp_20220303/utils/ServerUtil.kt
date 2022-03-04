@@ -52,6 +52,19 @@ class ServerUtil {
 //                    => UI에서도 JSONObject를 이용해서, 데이터 추출 / 실제 활용
                     val jsonObj = JSONObject(bodyString)
                     Log.d("서버테스트", jsonObj.toString())
+
+//                    연습: 로그인 성공 / 실패에 따른 로그 출력
+//                    "code" 이름표의 Int를 추출, 그 값을 if호 물어보자
+                    val code = jsonObj.getInt("code")
+
+                    if(code == 200){
+                        Log.d("로그인시도","성공!")
+                    }
+                    else{
+                        Log.d("로그인시도","실패!")
+                    }
+
+                    Log.d("로그인코드값",code.toString())
                 }
 
             })

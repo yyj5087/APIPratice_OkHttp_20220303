@@ -6,6 +6,13 @@ import org.json.JSONObject
 import java.io.IOException
 
 class ServerUtil {
+
+    //    서버유틸로 돌아온 응답을 => 액티비티에서 처리하도록, 일처리 넘기기.
+//    나에게 생긴일을 > 다른 클래스에게 처리 요청 : interface 활용
+    interface JsonResponseHandler {
+        fun onResponse(jsonObject: JSONObject)
+    }
+
     //    서버에 Request를 날리는 역할.
 //    함수를 만들려고 하는데, 어던 객체가 실행해도 결과만 잘 나오면 그만인 함수.
 //    코틀린에서 static에 해당하는 개념? companion object { }에 만들자.
@@ -14,7 +21,9 @@ class ServerUtil {
         private val BASE_URL = "http://54.180.52.26"
 
         //        로그인 기능 호출 함수
-        fun postRequestLogin(id: String, pw: String) {
+//        handler : 이 함수를 쓰느 화면에서, JSON 분석을 어떻게  / UI 에서 어떻게 활용할지 방안. (인터페이스)
+//        - 처리방안을 임시로 비워두려면, null 대입 허용
+        fun postRequestLogin(id: String, pw: String, handler: JsonResponseHandler?) {
 //            Request 제작 -> 실제 호출 -> 서버의 응답을, 화면에 전달
 
 //            제작 1) 어느 주소 (url) 로 접근할지? => 서버주소 + 기능 주소
@@ -41,37 +50,53 @@ class ServerUtil {
 //              ex. 인터넷 끊김, 서버 접속 문제 등등 물리적 연결 실패
 //              ex. 비번 틀려서 로그인 실패 : 서버 연결 성공, 응답도 돌아왔는데 > 그 내용만 실패. (물리적 실패X)
                 }
+
                 override fun onResponse(call: Call, response: Response) {
 //                    어떤 내용이던, 응답 자체는 잘 돌아온 경우. (그 내용은 성공 / 실패 일 수 있다)
 //                    응답 : response 변수 > 응답의 본문 (body) 만 보자.
 
 
-                    val bodyString = response.body!!.string() // toString() 아님!! ,String() 기능은 1회용. 변수에 담
+                    val bodyString =
+                        response.body!!.string() // toString() 아님!! ,String() 기능은 1회용. 변수에 담
 //                응답의 본문을 String으로 변환하면, JSON Encoding 적용된 상태. (한글 깨짐)
 //                JSONObject 객체 응답본문 String 을 변환해주면, 한글이 복구됨.
 //                    => UI에서도 JSONObject를 이용해서, 데이터 추출 / 실제 활용
                     val jsonObj = JSONObject(bodyString)
-                    Log.d("서버테스트", jsonObj.toString())
+                    Log.d("서버응답", jsonObj.toString())
+                    
+//                    실제 : handler 변수에, jsonObj를 가지고 화면에서 어떻게 처리할지 계획이 들어와있다.
+//                    (계획이 되어있을떼만)해당 계획을 실행하자
+                    handler?.onResponse(jsonObj)
+//                    핸드러에 실체가 있을때만 실행하자
 
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
 //                    연습: 로그인 성공 / 실패에 따른 로그 출력
 //                    "code" 이름표의 Int를 추출, 그 값을 if호 물어보자
-                    val code = jsonObj.getInt("code")
-
-                    if(code == 200){
-                        Log.d("로그인시도","성공!")
-
-                        val dataObj = jsonObj.getJSONObject("data")
-                        val useObj = dataObj.getJSONObject("name")
-                        val nickname = useObj.getString("nick_name")
-                        Log.d("로그인사람","테스트계정")
-                    }
-                    else{
-                        Log.d("로그인시도","실패!")
-                        val message = jsonObj.getString("message")
-                        Log.d("실패사유",message)
-                    }
-
-                    Log.d("로그인코드값",code.toString())
+//                    val code = jsonObj.getInt("code")
+//
+//                    if (code == 200) {
+//                        Log.d("로그인시도", "성공!")
+//
+//                        val dataObj = jsonObj.getJSONObject("data")
+//                        val useObj = dataObj.getJSONObject("user")
+//                        val nickname = useObj.getString("nick_name")
+//                        Log.d("로그인사람", nickname)
+//                    } else {
+//                        Log.d("로그인시도", "실패!")
+//                        val message = jsonObj.getString("message")
+//                        Log.d("실패사유", message)
+//                    }
+//
+//                    Log.d("로그인코드값", code.toString())
+//                }
                 }
 
             })

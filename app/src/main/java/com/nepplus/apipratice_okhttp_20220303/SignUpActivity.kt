@@ -51,7 +51,6 @@ class SignUpActivity : BasicActivity() {
                             finish()
                         }
 
-
                     }
 
                 }

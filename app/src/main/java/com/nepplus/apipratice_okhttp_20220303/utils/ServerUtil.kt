@@ -69,43 +69,44 @@ class ServerUtil {
                     handler?.onResponse(jsonObj)
 //                    핸드러에 실체가 있을때만 실행하자
                 }
+            })
+        }
 
 
-                fun putRequestSignUp(
-                    email: String,
-                    pw: String,
-                    nickname: String,
-                    handler: JsonResponseHandler?
-                ) {
-                    val urlString = "${BASE_URL}/user"
-                    val formData = FormBody.Builder()
-                        .add("email", email)
-                        .add("password", pw)
-                        .add("nick_name", nickname)
-                        .build()
+        fun putRequestSignUp(
+            email: String,
+            pw: String,
+            nickname: String,
+            handler: JsonResponseHandler?
+        ) {
+            val urlString = "${BASE_URL}/user"
+            val formData = FormBody.Builder()
+                .add("email", email)
+                .add("password", pw)
+                .add("nick_name", nickname)
+                .build()
 
-                    val request = Request.Builder()
-                        .url(urlString)
-                        .put(formData)
-                        .build()
+            val request = Request.Builder()
+                .url(urlString)
+                .put(formData)
+                .build()
 
-                    val client = OkHttpClient
-                    client.newCall(request).enqueue(object : Callback {
-                        override fun onFailure(call: Call, e: IOException) {
+            val client = OkHttpClient()
+            client.newCall(request).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
 
-                        }
+                }
 
-                        override fun onResponse(call: Call, response: Response) {
-                            val bodyString = response.body!!.string()
-                            val jsonObject = JSONObject(bodyString)
-                            Log.d("서버응답", jsonObject.toString())
-                            handler?.onResponse(jsonObj)
-                        }
-
-                    })
+                override fun onResponse(call: Call, response: Response) {
+                    val bodyString = response.body!!.string()
+                    val jsonObject = JSONObject(bodyString)
+                    Log.d("서버응답", jsonObject.toString())
+                    handler?.onResponse(jsonObject)
                 }
 
             })
         }
+
     }
 }
+

@@ -2,9 +2,11 @@ package com.nepplus.apipratice_okhttp_20220303
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.nepplus.apipratice_okhttp_20220303.databinding.ActivityMainBinding
 import com.nepplus.apipratice_okhttp_20220303.utils.ServerUtil
+import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding : ActivityMainBinding
@@ -15,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         setupEvents()
         setValues()
     }
-    fun setupEvents(){
+    fun setupEvents() {
         binding.btnLogin.setOnClickListener {
 //            ID / PW추출
 
@@ -23,10 +25,21 @@ class MainActivity : AppCompatActivity() {
             val inputPw = binding.edtPassword.text.toString()
 //            API서버에 아이디/ 비번을 보내서 실제로 회원인지 검사 -> 로그인 시도
 
-            ServerUtil.postRequestLogin(inputId, inputPw)
-        }
-    }
-    fun setValues(){
+            ServerUtil.postRequestLogin(inputId, inputPw, object : ServerUtil.JsonResponseHandler {
+                override fun onResponse(jsonObject: JSONObject) {
+//                    화면의 입장에서, 로그인 결과를 받아서 처리할 코드
+                    val code = jsonObject.getInt("code")
+                    if(code == 200){
 
+                    }
+                    else{
+                        Toast.makeText(this@MainActivity, "로그인 실패!", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            })
+        }
+        fun setValues() {
+
+        }
     }
 }

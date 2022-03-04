@@ -16,10 +16,12 @@ class MainActivity : AppCompatActivity() {
     }
     fun setupEvents(){
         binding.btnLogin.setOnClickListener {
+//            ID / PW추출
 
             val inputId = binding.edtId.text.toString()
             val inputPw = binding.edtPassword.text.toString()
 //            API서버에 아이디/ 비번을 보내서 실제로 회원인지 검사 -> 로그인 시도
+
         }
     }
     fun setValues(){

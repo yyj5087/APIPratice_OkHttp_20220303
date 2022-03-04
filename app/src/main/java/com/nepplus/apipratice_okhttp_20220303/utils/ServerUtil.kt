@@ -62,6 +62,8 @@ class ServerUtil {
                     }
                     else{
                         Log.d("로그인시도","실패!")
+                        val message = jsonObj.getString("message")
+                        Log.d("실패사유",message)
                     }
 
                     Log.d("로그인코드값",code.toString())

@@ -35,11 +35,15 @@ class ServerUtil {
 //            => 서버에 다녀와서 할 일을 등록 : enqueue (Callback)
             client.newCall(request).enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
-
+//              실패 : 서버 연결 자체를 실패. 응답이 오지 않았다.
+//              ex. 인터넷 끊김, 서버 접속 문제 등등 물리적 연결 실패
+//              ex. 비번 틀려서 로그인 실패 : 서버 연결 성공, 응답도 돌아왔는데 > 그 내용만 실패. (물리적 실패X)
                 }
-
                 override fun onResponse(call: Call, response: Response) {
+//                    어떤 내용이던, 응답 자체는 잘 돌아온 경우. (그 내용은 성공 / 실패 일 수 있다)
+//                    응답 : response 변수 > 응답의 본문 (body) 만 보자.
 
+                    val bodyString = response.body!!.string() // toString() 아님!! ,String() 기능은 1회용. 변수에 담다두고 이용
                 }
 
             })

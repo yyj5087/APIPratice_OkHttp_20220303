@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
             val inputPw = binding.edtPassword.text.toString()
 //            API서버에 아이디/ 비번을 보내서 실제로 회원인지 검사 -> 로그인 시도
 
-
+            ServerUtil.postRequestLogin(inputId, inputPw)
         }
     }
     fun setValues(){

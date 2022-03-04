@@ -33,13 +33,22 @@ class SignUpActivity : BasicActivity() {
 //                        회원가입 성공 /실패 분기
                         val code = jsonObject.getInt("code")
                         if(code == 200){
-
+//                            가입한 사람의 닉네임 추출 > ~~님 , 가입을 축하합니다! 토스트
+//                            회원가입화면 종료 > 로그인화면 복귀
+                            val dataObj = jsonObject.getJSONObject("data")
+                            val userObj = dataObj.getJSONObject("user")
+                            val nickname = userObj.getString("nick_name")
+                            runOnUiThread {
+                                Toast.makeText(mContext, "${nickname}님 가입을 축하합니다.", Toast.LENGTH_SHORT).show()
+                            }
                         }
                         else{
                             val message = jsonObject.getString("message")
                             runOnUiThread {
                                 Toast.makeText(mContext, "실패 사유 : ${message}", Toast.LENGTH_SHORT).show()
                             }
+//                            화면 종료: 객체 소멸(UI 동작 x)
+                            finish()
                         }
 
                     }

@@ -42,7 +42,7 @@ class MainActivity : BasicActivity() {
     }
 
     fun getTopicListFromServer(){
-        ServerUtil.getRequestMyInfo(mContext, object : ServerUtil.JsonResponseHandler{
+        ServerUtil.getRequestMainInfo(mContext, object : ServerUtil.JsonResponseHandler{
             override fun onResponse(jsonObject: JSONObject) {
                 
 //                서버가 주는 토론 주제 목록 파실 => mTopList에 추가하기.

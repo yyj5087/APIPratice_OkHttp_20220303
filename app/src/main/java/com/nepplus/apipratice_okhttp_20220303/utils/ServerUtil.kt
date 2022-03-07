@@ -183,7 +183,7 @@ class ServerUtil {
         }
 
         fun getRequestMainInfo(context: Context, handler: JsonResponseHandler?){
-            val urlBuilder = "${BASE_URL}v2/main_info".toHttpUrlOrNull()!!.newBuilder()
+            val urlBuilder = "${BASE_URL}/v2/main_info".toHttpUrlOrNull()!!.newBuilder()
                 .build() // 쿼리파라미터를 담을게 없다. 바로 build로 마무리
             val urlString = urlBuilder.toString()
 

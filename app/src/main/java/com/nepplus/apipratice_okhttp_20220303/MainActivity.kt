@@ -3,7 +3,9 @@ package com.nepplus.apipratice_okhttp_20220303
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
+import com.nepplus.apipratice_okhttp_20220303.Adapters.TopicAdapter
 import com.nepplus.apipratice_okhttp_20220303.databinding.ActivityLoginBinding
 import com.nepplus.apipratice_okhttp_20220303.databinding.ActivityMainBinding
 import com.nepplus.apipratice_okhttp_20220303.datas.TopicData
@@ -15,7 +17,7 @@ class MainActivity : BasicActivity() {
     
 //    실제로 서버가 내려주는 주제 목록을 담을 그릇
     val mTopicList = ArrayList<TopicData>()
-    
+    lateinit var mAdapter: TopicAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
@@ -31,6 +33,8 @@ class MainActivity : BasicActivity() {
 
 //      메인 화면 정보 가져오기 => API 호출 / 응답 처리
         getTopicListFromServer()
+        mAdapter = TopicAdapter(mContext,R.layout.topic_list_item,mTopicList)
+        binding.topicListView.adapter = mAdapter
 
     }
 

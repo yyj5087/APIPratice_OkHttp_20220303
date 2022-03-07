@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import com.nepplus.apipratice_okhttp_20220303.databinding.ActivityLoginBinding
 import com.nepplus.apipratice_okhttp_20220303.databinding.ActivityMainBinding
+import com.nepplus.apipratice_okhttp_20220303.utils.ServerUtil
 
 class MainActivity : BasicActivity() {
     lateinit var binding: ActivityMainBinding
@@ -20,6 +21,9 @@ class MainActivity : BasicActivity() {
     }
 
     override fun setValues() {
+
+//        화면의 텍스트뷰에 닉네임을 보여주기 위한 작업
+        ServerUtil.get
 
     }
 

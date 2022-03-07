@@ -28,7 +28,7 @@ class LoginActivity : BasicActivity() {
          }
 //         연습문제. ContextUil을 이용해서, true로 변경되면 자동로그인값도 true로 저장
 //         false로 되면, 자동로그인 값도 false로 저장
-         ContextUtil.setAutoLogin(mContext, isChecked)
+         ContextUtil.setAutoLogin(mContext, isAuto = true)
 
 
 

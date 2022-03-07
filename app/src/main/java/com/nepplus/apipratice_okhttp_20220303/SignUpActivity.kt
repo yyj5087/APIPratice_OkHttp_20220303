@@ -22,6 +22,14 @@ class SignUpActivity : BasicActivity() {
 
     override fun setupEvents() {
 
+//        도전과제 만약 이메일 /닉네임 중복검사를 통과하지 못한 상태라면,
+//        토스트로 " 이메일 중복검사를 통과해야 합니다." 등의 문구만 출력, 가입 진행X
+
+//        hint) 진행할 상황이 아니라면, return 처리 하면 함수 종료
+
+//        binding.btnSignUp.setOnClickListener {
+//            if()
+//        }
 
 //        닉네임 검사 버튼 기능
         binding.btnIdCheck.setOnClickListener {

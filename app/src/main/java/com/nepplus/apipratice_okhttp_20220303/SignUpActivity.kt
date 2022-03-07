@@ -2,7 +2,9 @@ package com.nepplus.apipratice_okhttp_20220303
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import com.nepplus.apipratice_okhttp_20220303.databinding.ActivitySignUpBinding
 import com.nepplus.apipratice_okhttp_20220303.utils.ServerUtil
@@ -18,6 +20,12 @@ class SignUpActivity : BasicActivity() {
 
     }
     override fun setupEvents() {
+
+        binding.edtEmail.addTextChangedListener {
+            Log.d("입력내용",it.toString())
+        }
+
+
 
         binding.btnEmailCheck.setOnClickListener {
 //            입력 이메일 값 추출

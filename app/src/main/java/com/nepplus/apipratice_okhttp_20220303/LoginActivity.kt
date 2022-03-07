@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.nepplus.apipratice_okhttp_20220303.databinding.ActivityLoginBinding
+import com.nepplus.apipratice_okhttp_20220303.utils.ContextUtil
 import com.nepplus.apipratice_okhttp_20220303.utils.ServerUtil
 import org.json.JSONObject
 
@@ -38,11 +39,17 @@ class LoginActivity : BasicActivity() {
 //                    서버에 다녀오고 실행 : 라이브러리가 자동으로 백그라운드에서 돌도록 만들어 둔 코드
                     val code = jsonObject.getInt("code")
                     if(code == 200){
+                        val dataObj = jsonObject.getJSONObject("data")
+                        val userObj = dataObj.getJSONObject("user")
+                        val nickname = userObj.getString("nick_name")
+
                         runOnUiThread {
-                            Toast.makeText(mContext, "로그인 성공!", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(mContext, "${nickname}님, 환영합니다!", Toast.LENGTH_SHORT).show()
                         }
 
                         val token = dataObj.getString("token")
+                        ContextUtil.setToken(mContext,token)
+
 //                        변수에 담킨 토큰값을 shared에 담아두자
 //                        로그인 성공시에는 담기만, 필요한 화면/ 클래스에서 꺼내서 사용
 

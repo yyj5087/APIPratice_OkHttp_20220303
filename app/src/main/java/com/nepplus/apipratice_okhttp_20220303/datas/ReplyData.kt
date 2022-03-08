@@ -7,7 +7,7 @@ class ReplyData(
     var content: String,
 ) {
 
-    val whiter = UserData() //모든 댓글에는 작성자가 있다. null 가능성이 없다
+    var whiter = UserData() //모든 댓글에는 작성자가 있다. null 가능성이 없다
 //    보조 생성자 추가 연습 : 파라미터 X.
     constructor() : this(0,"내용없음")
     companion object{

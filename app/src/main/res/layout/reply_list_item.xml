@@ -24,11 +24,13 @@
         android:layout_height="wrap_content"/>
     <LinearLayout
         android:orientation="horizontal"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
             android:padding="10dp"
             android:text="답글 0"
+            android:background="@drawable/dark_gray_border_box"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <TextView
@@ -38,12 +40,15 @@
         <TextView
             android:padding="10dp"
             android:text="좋아요 0"
+            android:background="@drawable/dark_gray_border_box"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
         <TextView
             android:padding="10dp"
             android:text="싫어요 0"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/dark_gray_border_box"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 

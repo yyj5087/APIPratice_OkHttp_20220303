@@ -91,10 +91,7 @@ class MainActivity : BasicActivity() {
                     Log.d("받아낸주제",topicObj.toString())
 //                    TopicData 변수 생성 => 멤버변수에, topicObj가 들고있는 값을 대입
                     val topicData = TopicData.getTopicDataFromJson(topicObj)
-                    topicData.id = topicObj.getInt("id")
-                    topicData.title = topicObj.getString("title")
-                    topicData.imageURL = topicObj.getString("img_url")
-                    topicData.replyCount = topicObj.getInt("reply_count")
+
 
 //                    완성된 TopicData 객체를 목록에 추가.
 

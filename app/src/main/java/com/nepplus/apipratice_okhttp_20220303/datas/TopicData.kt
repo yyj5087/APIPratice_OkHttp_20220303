@@ -9,6 +9,9 @@ class TopicData : Serializable {
     var imageURL = "" // 서버 : img_url, 앱 : imageURL 변수명 다른 경우,
     var replyCount = 0
 
+//    하나의 토론주제 : 여러개의 (목록) 선택진영
+
+    val sideList = ArrayList<SideData>()
 
     companion object{
 
@@ -25,11 +28,15 @@ class TopicData : Serializable {
 //            sides라는 JSONArray가 들어있음.
 //            => topicData의 하위 정보로, 선택진영 목록으로 저장.
 //            JSONArray > ArrayList
-            val sidesArr = JsonObj.getJSONObject("sides")
+            val sidesArr = JsonObj.getJSONArray("sides")
             for (i in 0 until sidesArr.length()){
 //                선택 진영 정보를 들고 있는 JSONObject추출
                 val sideObj = sidesArr.getJSONObject(i)
 //                sideObj도, SideData로 (선택진영) 변환
+                val sideData = SideData.getSideDataFromJson(sideObj)
+
+//                topicData 변수의 하위 목록으로 등록
+                topicData.sideList.add(sideData)
             }
 
 //            완성된 TopicData 리턴턴

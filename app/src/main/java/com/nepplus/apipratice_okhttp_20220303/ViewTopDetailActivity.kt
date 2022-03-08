@@ -6,6 +6,8 @@ import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
 import com.nepplus.apipratice_okhttp_20220303.databinding.ActivityViewTopDetailBinding
 import com.nepplus.apipratice_okhttp_20220303.datas.TopicData
+import com.nepplus.apipratice_okhttp_20220303.utils.ServerUtil
+import org.json.JSONObject
 
 class ViewTopDetailActivity : BasicActivity() {
     lateinit var binding: ActivityViewTopDetailBinding
@@ -29,6 +31,16 @@ class ViewTopDetailActivity : BasicActivity() {
 
         binding.txtTitle.text = mTopicData.title
         Glide.with(mContext).load(mTopicData.imageURL).into(binding.imgTopicBackground)
+        getTopicDetailFromServer()
+    }
+
+    fun getTopicDetailFromServer(){
+        ServerUtil.getRequestTopicDetail(mContext,mTopicData.id, object : ServerUtil.JsonResponseHandler{
+            override fun onResponse(jsonObject: JSONObject) {
+
+            }
+
+        })
     }
 
 }

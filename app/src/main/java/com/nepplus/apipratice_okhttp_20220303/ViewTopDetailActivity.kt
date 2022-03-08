@@ -33,6 +33,12 @@ class ViewTopDetailActivity : BasicActivity() {
         Glide.with(mContext).load(mTopicData.imageURL).into(binding.imgTopicBackground)
         getTopicDetailFromServer()
     }
+    fun setTopicDataToUi(){
+
+//        토론 주제에 대한 데이터들을, UI에 반영하는 함수.
+//        화면 초기 진입 실행 + 서버에서 다시 받아왔을때도 실행
+
+    }
 
     fun getTopicDetailFromServer(){
         ServerUtil.getRequestTopicDetail(mContext,mTopicData.id, object : ServerUtil.JsonResponseHandler{
@@ -45,6 +51,11 @@ class ViewTopDetailActivity : BasicActivity() {
                 val topicData = TopicData.getTopicDataFromJson(topicObj)
 //                변환된 객체를, mTopicData로 다시 대입. => UI 반영도 다시 실행.
                 mTopicData = topicData
+
+                runOnUiThread {
+                    setTopicDataToUi()
+                }
+
             }
 
         })

@@ -1,14 +1,19 @@
 package com.nepplus.apipratice_okhttp_20220303
 
+import android.content.Context
+import android.content.DialogInterface
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
 import com.nepplus.apipratice_okhttp_20220303.Adapters.TopicAdapter
 import com.nepplus.apipratice_okhttp_20220303.databinding.ActivityLoginBinding
 import com.nepplus.apipratice_okhttp_20220303.databinding.ActivityMainBinding
 import com.nepplus.apipratice_okhttp_20220303.datas.TopicData
+import com.nepplus.apipratice_okhttp_20220303.utils.ContextUtil
 import com.nepplus.apipratice_okhttp_20220303.utils.ServerUtil
 import org.json.JSONObject
 
@@ -27,6 +32,23 @@ class MainActivity : BasicActivity() {
     }
     override fun setupEvents() {
 
+        binding.btnLogout.setOnClickListener {
+//            경고창 > 확인시 로그아웃
+            val alert = AlertDialog.Builder(mContext)
+                .setTitle("로그아웃")
+                .setMessage("정말 로그아웃 하겠습니까?")
+                .setPositiveButton("확인",DialogInterface.OnClickListener { dialogInterface, i ->
+
+//                    로그인: 토큰값을 받아서 > 기기에 저장
+//                    로그아웃: 토큰값 (폰에서 삭제) > 서버에서 받아올 필요 X
+                    ContextUtil.setToken(mContext,"")
+                    val myIntent = Intent(mContext,SplashActivity::class.java)
+                    startActivity(myIntent)
+
+                })
+                .setNegativeButton("취소", null)
+                .show()
+        }
     }
 
     override fun setValues() {

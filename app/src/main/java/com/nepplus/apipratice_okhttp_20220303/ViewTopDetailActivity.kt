@@ -2,6 +2,7 @@ package com.nepplus.apipratice_okhttp_20220303
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
@@ -17,7 +18,7 @@ class ViewTopDetailActivity : BasicActivity() {
 
 //    보여주게 될 토론 주제 데이터 > 이벤트처리, 데이터 표현 등 여러 함수에서 사용
     lateinit var mTopicData: TopicData
-    lateinit var mAdapter: A
+    lateinit var mAdapter: ReplyAdapter
     val mReplyList = ArrayList<ReplyData>()
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -24,7 +24,17 @@ class ReplyAdapter(
             tempRow = LayoutInflater.from(mContext).inflate(R.layout.reply_list_item, null)
 
         }
-        var row = tempRow!!
+        val row = tempRow!!
+
+        val data = mList[position]
+
+        val txtSelectSide = row.findViewById<TextView>(R.id.txtSelectSide)
+        val txtWriterNickname = row.findViewById<TextView>(R.id.txtWriterNickname)
+        val txtReplyContent = row.findViewById<TextView>(R.id.txtReplyContent)
+
+        txtReplyContent.text = data.content
+        txtWriterNickname.text = data.whiter.nickname
+        txtSelectSide.text = "${data.selectedSide.title}"
 
 
 

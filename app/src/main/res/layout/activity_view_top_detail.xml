@@ -65,6 +65,11 @@
                             android:textColor="@color/white"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
+                        <Button
+                            android:text="투표하기"
+                            android:id="@+id/btnVote1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
                     </LinearLayout>
 
                     <TextView
@@ -92,6 +97,11 @@
                             android:id="@+id/txtVoteCount2"
                             android:text="0표"
                             android:textColor="@color/white"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                        <Button
+                            android:text="투표하기"
+                            android:id="@+id/btnVote2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
 

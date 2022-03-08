@@ -49,7 +49,17 @@ class ViewTopDetailActivity : BasicActivity() {
         }
 //        투표현황
         binding.btnVote2.setOnClickListener {
+//            2번진영 선택시, 그 진영에 투표하기
+            ServerUtil.postRequestVote(mContext,mTopicData.sideList[1].id, object : ServerUtil.JsonResponseHandler{
+                override fun onResponse(jsonObject: JSONObject) {
+                    val message = jsonObject.getString("message")
+                    runOnUiThread {
+                        Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
+                    }
+                    getTopicDetailFromServer()
+                }
 
+            })
         }
     }
 

@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
 import com.nepplus.apipratice_okhttp_20220303.databinding.ActivityViewTopDetailBinding
+import com.nepplus.apipratice_okhttp_20220303.datas.ReplyData
 import com.nepplus.apipratice_okhttp_20220303.datas.TopicData
 import com.nepplus.apipratice_okhttp_20220303.utils.ServerUtil
 import org.json.JSONObject
@@ -15,6 +16,8 @@ class ViewTopDetailActivity : BasicActivity() {
 
 //    보여주게 될 토론 주제 데이터 > 이벤트처리, 데이터 표현 등 여러 함수에서 사용
     lateinit var mTopicData: TopicData
+
+    val mReplyAdapter = ArrayList<ReplyData>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -122,6 +125,15 @@ class ViewTopDetailActivity : BasicActivity() {
                     setTopicDataToUi()
                 }
 
+                // topicObj 내부에는 replies라는 댓글 목록 JSONArray도 들어있다.
+//                mReplyList에 넣어주자
+                val repliesArr = topicObj.getJSONArray("replies")
+                for (i in 0 until repliesArr.length()){
+                    val replyObj = repliesArr.getJSONObject(i)
+
+                    mReplyAdapter.add(ReplyData.getReplyDataFromJson(replyObj))
+                }
+//                서버의 동작이므로, 어댑터 세팅보다 늦게 끝날수 있다. (notifydatasetchanged)
             }
 
         })

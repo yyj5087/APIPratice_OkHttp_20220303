@@ -23,6 +23,8 @@ class EditReplyActivity : BasicActivity() {
 
     override fun setValues() {
 
+        binding.txtTopicTitle.text = mTopicData.title
+        binding.txtSideTitle.text = mTopicData.mySelectedSide!!.title
     }
 
 

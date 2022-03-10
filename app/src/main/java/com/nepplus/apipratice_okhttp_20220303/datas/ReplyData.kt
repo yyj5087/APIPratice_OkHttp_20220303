@@ -28,17 +28,66 @@ class ReplyData(
 //    내 폰 시간대 (local)에 맞게 보정 예정
 
     val localCal = Calendar.getInstance()
+
+
+
+
 //    작성일시의 일시값을 그대로 복사 (원래값 : 현재 일시)
     localCal.time = this.createdAt.time
+
+
 //    local 값을 내폰설정에맞게시간을더하자
 //    한국 : +9를 더해야함
 //    LA : -8 더해야함
 //    Calendar 객체의 기능으로, 시간대 정보 추출.
     val localTimeZone = localCal.timeZone
+
 //    시간대가, GMT와의 시차가 얼마나 나는지? (rawOffset - 몇ms 차이까지)
     val diffHour = localTimeZone.rawOffset / 60 / 60 / 1000//ms => 시간으로 변경
+
 //    구해진 시차를 기존 시간에서 시간값으로 더해주기
     localCal.add(Calendar.HOUR,diffHour)
+
+    //    현재 시간과의 차이를 구해서, 차이값에 따라 다른 양식으로 가공
+//    ex. 2분 전 작성=> "2분 전"
+//    ex. 5일 전 작성 =>"3월 10일 오전 5시 6분"
+
+    val now = Calendar.getInstance()
+
+    val timeAgo = now.timeInMillis - localCal.timeInMillis //현재시간 - 작성일시 결과. 몇ms 차이나는가?
+
+//    5초 이내 => "방금 전"
+    if(timeAgo < 5 * 1000){
+        return "방금 전"
+    }
+    else if(timeAgo < 60 * 1000){
+//        timeAgo : ms 단위로 계산됨. => ?초전을 보여주려면, 초단위로 변환.
+        val diffSecond = timeAgo /1000
+        return "${diffSecond}초 전"
+    }
+    else if(timeAgo < 1 * 60 * 60 * 1000){
+//        1시간 이내에 작성된 글? => ?분 전
+        val diffMinute = timeAgo / 1000 / 60
+        return "${diffMinute}분 전"
+    }
+    else if(timeAgo < 24 * 60 * 60 * 1000){
+//        24시간 이내 : ? 시간 전
+        val diffay = timeAgo / 1000 / 60 / 60
+        return "${diffay}시간 전"
+
+    }
+    else if(timeAgo < 10 * 24 * 60 * 60 * 1000){
+        val diffDay = timeAgo / 1000/ 60 / 60 / 24
+        return "${diffDay}일 전"
+
+    }
+    else{
+//        10일 이상 :  sdf로 가공해서 리턴.
+        return sdf.format(localCal.time)
+    }
+
+
+
     return sdf.format(localCal.time)
     }
     companion object{

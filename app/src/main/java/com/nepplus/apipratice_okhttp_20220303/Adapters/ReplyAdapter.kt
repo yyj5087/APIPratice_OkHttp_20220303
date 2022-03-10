@@ -44,8 +44,20 @@ class ReplyAdapter(
 //        txtCreateAt.text = "${data.createdAt.get(Calendar.YEAR)}-${data.createdAt.get(Calendar.MONTH) + 1}-${data.createdAt.get(Calendar.DAY_OF_MONTH)}"
 
 //        임시2 - "2022-03-10" 형태로 표현 => SImpleDataFormat 활용
-        val sdf =SimpleDateFormat("yyyy-MM-dd")
 
+//        연습.
+//        양식 1) 2022년 3월 5일
+//        양식 2) 220305
+//        양식 3) 3월 5일 오전 2시 5분
+//        양식 4) 21년 3/5 (토)- 18:05
+        val sdf1 =SimpleDateFormat("yyyy-MM-dd")
+        val sdf2 =SimpleDateFormat("yyyy-MM-dd")
+        val sdf3 =SimpleDateFormat("yyyy-MM-dd")
+        val sdf4 =SimpleDateFormat("yyyy-MM-dd")
+
+
+//        val sdf =SimpleDateFormat("yyyy-MM-dd")
+        val sdf =SimpleDateFormat("yyyy년M월 d일")
 //        sdf.format(Data객체) => 지정해둔 양식의 String으로 가공
 //        createdAt : Calendar/ format의 피라미터: Data -> calendar 내용물인 time 변수가 Data
         txtCreateAt.text = sdf.format(data.createdAt.time)

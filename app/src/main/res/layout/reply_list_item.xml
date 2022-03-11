@@ -44,6 +44,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
+            android:id="@+id/txtReReplyContent"
             android:padding="10dp"
             android:text="답글 0"
             android:background="@drawable/dark_gray_border_box"
@@ -54,6 +55,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"/>
         <TextView
+            android:id="@+id/txtLikeCount"
             android:padding="10dp"
             android:text="좋아요 0"
             android:background="@drawable/dark_gray_border_box"
@@ -61,6 +63,7 @@
             android:layout_height="wrap_content"/>
 
         <TextView
+            android:id="@+id/txtHateCount"
             android:padding="10dp"
             android:text="싫어요 0"
             android:layout_marginStart="10dp"

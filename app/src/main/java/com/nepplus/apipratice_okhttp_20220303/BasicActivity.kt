@@ -3,9 +3,10 @@ package com.nepplus.apipratice_okhttp_20220303
 import android.content.Context
 import android.os.Bundle
 import android.widget.ImageView
-import android.widget.Toolbar
+
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 
 // 다른 모든 화면이 공통적으로 가질 기능 / 멤버변수를 모아두는 (부모) 클래스
 abstract class BasicActivity : AppCompatActivity() {

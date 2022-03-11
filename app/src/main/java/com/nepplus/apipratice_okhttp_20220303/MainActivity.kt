@@ -1,18 +1,13 @@
 package com.nepplus.apipratice_okhttp_20220303
 
-import android.app.ActionBar
-import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toolbar
 import androidx.appcompat.app.AlertDialog
-import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
 import com.nepplus.apipratice_okhttp_20220303.Adapters.TopicAdapter
-import com.nepplus.apipratice_okhttp_20220303.databinding.ActivityLoginBinding
 import com.nepplus.apipratice_okhttp_20220303.databinding.ActivityMainBinding
 import com.nepplus.apipratice_okhttp_20220303.datas.TopicData
 import com.nepplus.apipratice_okhttp_20220303.utils.ContextUtil
@@ -28,6 +23,7 @@ class MainActivity : BasicActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
+
         setupEvents()
         setValues()
 

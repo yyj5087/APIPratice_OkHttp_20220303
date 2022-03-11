@@ -1,5 +1,6 @@
 package com.nepplus.apipratice_okhttp_20220303
 
+import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 
 // 다른 모든 화면이 공통적으로 가질 기능 / 멤버변수를 모아두는 (부모) 클래스
@@ -16,4 +17,17 @@ abstract class BasicActivity : AppCompatActivity() {
 //    => 추상 메쏘드로 물려줘서, 반드시 오버라이딩하게 만들자.
     abstract fun setupEvents()
     abstract fun setValues()
+
+
+//    실제 구현 내용을 같이 물려주는 함수. (일반 함수)
+//    액션바 설정 기능
+
+    fun setCustomActionBar(){
+        val defaultActionBar = supportActionBar!!
+        defaultActionBar.setDisplayShowCustomEnabled(true)
+        defaultActionBar.setCustomView(R.layout.my_custom_action_bar)
+
+        val toolbar = defaultActionBar.customView.parent as Toolbar
+        toolbar.setContentInsetsAbsolute(0,0)
+    }
 }

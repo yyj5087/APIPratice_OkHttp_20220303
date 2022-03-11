@@ -100,6 +100,9 @@ class SignUpActivity : BasicActivity() {
         }
 
         binding.btnSignUp.setOnClickListener {
+
+//            [도전과제] 이메일 - @가 반드시 포함되어야함 비밀번호 8자 이상
+
             val inputEmail = binding.edtEmail.text.toString()
             val inputPassword = binding.edtPassword.text.toString()
             val inputNickname = binding.edtNickname.text.toString()

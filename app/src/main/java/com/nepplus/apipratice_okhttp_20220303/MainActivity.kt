@@ -4,6 +4,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
@@ -60,12 +61,7 @@ class MainActivity : BasicActivity() {
 
 //       임시 테스트 > 액션바 커스텀 모드
 
-        val defaultActionBar = supportActionBar!!
-        defaultActionBar.setDisplayShowCustomEnabled(true)
-        defaultActionBar.setCustomView(R.layout.my_custom_action_bar)
-
-        val toolbar = defaultActionBar.customView.parent as Toolbar
-        toolbar.setContentInsetsAbsolute(0,0)
+       btnBack.visibility = View.GONE
 
 
 //      메인 화면 정보 가져오기 => API 호출 / 응답 처리

@@ -10,22 +10,24 @@ import com.nepplus.apipratice_okhttp_20220303.utils.ServerUtil
 import org.json.JSONObject
 
 class EditReplyActivity : BasicActivity() {
-    lateinit var binding : ActivityEditReplyBinding
-//
+    lateinit var binding: ActivityEditReplyBinding
+
+    //
     lateinit var mTopicData: TopicData
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_edit_reply)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_edit_reply)
         mTopicData = intent.getSerializableExtra("topic") as TopicData
         setupEvents()
         setValues()
     }
+
     override fun setupEvents() {
 
         binding.btnPostReply.setOnClickListener {
 //            앱에서 검사 > 입력문구가 5자 미만이면 토스트, 함수 강제종료
             val inputContent = binding.edtReplyContent.text.toString()
-            if(inputContent.length < 5) {
+            if (inputContent.length < 5) {
                 Toast.makeText(mContext, "5자 이상으로 입력해주세요.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -33,8 +35,25 @@ class EditReplyActivity : BasicActivity() {
                 mContext,
                 mTopicData.id,
                 inputContent,
-                object : ServerUtil.JsonResponseHandler{
+                object : ServerUtil.JsonResponseHandler {
                     override fun onResponse(jsonObject: JSONObject) {
+
+//                        서버는 댓글 등록 성공/실패만 알려줌.
+                        val code = jsonObject.getInt("code")
+                        runOnUiThread {
+                            if (code == 200) {
+                                Toast.makeText(mContext, "댓글 등록에 성공했습니다.", Toast.LENGTH_SHORT).show()
+
+                                finish()
+                            }
+                            else {
+                                val message = jsonObject.getString("message")
+                                Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
+                            }
+
+
+                        }
+
 
                     }
 

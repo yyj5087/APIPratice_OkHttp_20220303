@@ -2,6 +2,7 @@ package com.nepplus.apipratice_okhttp_20220303
 
 import android.content.Context
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 
@@ -13,6 +14,12 @@ abstract class BasicActivity : AppCompatActivity() {
 
 //    미리 mContext 변수에, 화면의 this를 담아두고 => 모든 액티비티에 상속으로 물려주자.
     lateinit var mContext: Context
+
+
+//    액션바의 UI 변수를 멤버변수로 >  상속 가능
+//     => 변수에 대입 : 커스텀 액션바 세팅 뒤에
+
+    lateinit var btnBack: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,5 +53,13 @@ abstract class BasicActivity : AppCompatActivity() {
 
         val toolbar = defaultActionBar.customView.parent as Toolbar
         toolbar.setContentInsetsAbsolute(0,0)
+
+//        xml에 그려둔 UI 가져오기
+        btnBack = defaultActionBar.customView.findViewById(R.id.btnBack)
+
+//        누르면 화면 종료 : 모든 화면 공통
+        btnBack.setOnClickListener {
+            finish()
+        }
     }
 }

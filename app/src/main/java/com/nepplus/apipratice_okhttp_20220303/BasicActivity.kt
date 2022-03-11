@@ -1,5 +1,6 @@
 package com.nepplus.apipratice_okhttp_20220303
 
+import android.os.Bundle
 import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 
@@ -11,6 +12,13 @@ abstract class BasicActivity : AppCompatActivity() {
 
 //    미리 mContext 변수에, 화면의 this를 담아두고 => 모든 액티비티에 상속으로 물려주자.
     val mContext = this
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if(supportActionBar != null) {
+            setCustomActionBar()
+        }
+    }
 
 //    setupEvents / setValues 함수를 만들어두고, 물려주자
 //    실제 함수를 구현해서 물려줘봐야, 오버라이딩 해서 사용한다.
